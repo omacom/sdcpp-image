@@ -9,14 +9,21 @@ It builds `sd-server` from a pinned upstream commit with the patches in [`patche
 
 The runtime layer is Arch Linux, pinned by digest, with the Vulkan loader, Mesa's RADV driver and curl for the health probe. The licenses of stable-diffusion.cpp, ggml and the third-party code built into `sd-server` are in `/usr/share/licenses/stable-diffusion.cpp`.
 
+## CUDA
+
+[`Containerfile.cuda`](Containerfile.cuda) builds the same commit and patches with CUDA for NVIDIA's unified-memory ARM machines (GB10, N1x, compute capability 12.1), published as `ghcr.io/omacom/sdcpp-cuda`. It is built on one of those machines, on NVIDIA's CUDA development image pinned by digest, and its runtime layer is Ubuntu 24.04 with only the CUDA libraries `sd-server` links (cudart, cuBLAS and cuBLASLt, redistributable under NVIDIA's CUDA EULA, whose text is in `/usr/share/licenses/stable-diffusion.cpp/nvidia`). The driver's `libcuda` arrives through the machine's CDI spec.
+
 ## Building and publishing
 
 ```sh
 podman build -t ghcr.io/omacom/sdcpp:<commit>-<n> .
 podman push ghcr.io/omacom/sdcpp:<commit>-<n>
+
+podman build -f Containerfile.cuda -t ghcr.io/omacom/sdcpp-cuda:<commit>-<n> .
+podman push ghcr.io/omacom/sdcpp-cuda:<commit>-<n>
 ```
 
-omarchy-local-ai pins the image by digest in `runtimes/sdcpp.toml`, with a review of the build in `reviews/`. Drop a patch once upstream has it and the pinned commit includes it.
+omarchy-local-ai pins the images by digest in `runtimes/sdcpp.toml` and `runtimes/sdcpp-cuda.toml`, with a review of each build in `reviews/`. Drop a patch once upstream has it and the pinned commit includes it.
 
 ## License
 
