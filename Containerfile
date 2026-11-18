@@ -31,5 +31,8 @@ RUN pacman -Syu --noconfirm --needed vulkan-icd-loader vulkan-radeon curl \
 COPY --from=build /build/bin/sd-server /usr/bin/sd-server
 COPY --from=build /licenses /usr/share/licenses/stable-diffusion.cpp
 COPY patches/ /usr/share/doc/stable-diffusion.cpp/patches/
+LABEL org.opencontainers.image.source="https://github.com/omacom/sdcpp-image"
+LABEL org.opencontainers.image.description="stable-diffusion.cpp's sd-server, built with Vulkan for omarchy-local-ai"
+LABEL org.opencontainers.image.licenses="MIT"
 EXPOSE 1234
 CMD ["sd-server", "--listen-ip", "0.0.0.0", "--listen-port", "1234"]
