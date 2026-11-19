@@ -1,3 +1,5 @@
+> **Archived.** This image is now built from [`images/sdcpp`](https://github.com/omacom/omarchy-local-ai/tree/master/images/sdcpp) and [`images/sdcpp-cuda`](https://github.com/omacom/omarchy-local-ai/tree/master/images/sdcpp-cuda) in [omacom/omarchy-local-ai](https://github.com/omacom/omarchy-local-ai) and published as `ghcr.io/omacom/omarchy-local-ai/…`. Images already published from here stay available.
+
 # sdcpp-image
 
 The container image [omarchy-local-ai](https://github.com/omacom/omarchy-local-ai) runs image models in: [stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp)'s `sd-server`, built with Vulkan for AMD GPUs, published as `ghcr.io/omacom/sdcpp`.
